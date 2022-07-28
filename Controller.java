@@ -64,13 +64,12 @@ public class Controller {
     public Controller() {
         wordGrids = new ArrayList<>();
        
-        currentGridPaneCount  = 0;
+        currentGridPaneCount = 0;
         currentWord = "";
 
         wordUtil = new WordGenerator();
         secretWord = wordUtil.getRandomWord();
         System.out.println("Secret Word: " + secretWord);
-
 
         invalidInputAlert = new Alert(AlertType.ERROR);
         invalidInputAlert.setTitle("Invalid Input");
@@ -118,7 +117,7 @@ public class Controller {
             }
      
         }
-        if(!wordUtil.isWord(currentWord)){
+        if(!wordUtil.isWord(currentWord.toLowerCase())){
             notAWordAlert.showAndWait();
             return;
         }
@@ -216,11 +215,12 @@ public class Controller {
         for(GridPane row : wordGrids){
             
             for(Node currentNode : row.getChildren()){
-               ((TextField)currentNode).setText("");
-               ((TextField)currentNode).setStyle("-fx-background-color: -fx-background; -fx-border-color: black;");
+                System.out.println("Evaluating: " + currentNode);
+               //((TextField)currentNode).setText("");
+               //((TextField)currentNode).setStyle("-fx-background-color: -fx-background; -fx-border-color: black;");
             }
 
-            row.setDisable(true);;
+            row.setDisable(true);
         }
 
         wordGrids.get(0).setDisable(false);
