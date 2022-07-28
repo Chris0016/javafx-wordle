@@ -12,7 +12,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("wordlefx.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 600, 600));
+
+        Scene scene = new Scene(root, 600, 800);
+        scene.getStylesheets().add(this.getClass().getResource("application.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

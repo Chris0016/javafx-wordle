@@ -15,11 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 
 
@@ -60,12 +56,6 @@ public class Controller {
     Alert winGameAlert;
     Alert loseGameAlert;
 
-    Background greenBackground;
-    Background yellowBackground;
-    Background grayBackground;
-    Background resetBackground;
-
-
     String secretWord;
 
     WordGenerator wordUtil;
@@ -99,14 +89,8 @@ public class Controller {
         loseGameAlert.setTitle("You loose");
         loseGameAlert.setContentText("Sorry you loose. The secret word was " + secretWord);
        
-        greenBackground = new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY));
-        yellowBackground = new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY));
-        grayBackground = new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY));
-        resetBackground = new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY));
-        
-        
        
-        
+    
     }
 
     @FXML
@@ -186,12 +170,12 @@ public class Controller {
             currentTextField = ((TextField)currentGridpane.getChildren().get(i));
             currentLetter = currentTextField.getText();
 
-            if (currentLetter.charAt(0) == secretWord.charAt(i))
-                currentTextField.setBackground( greenBackground );
+            if (currentLetter.toLowerCase().charAt(0) == secretWord.charAt(i))
+                currentTextField.setStyle("-fx-background-color: green;");
             else if (secretWord.contains(currentLetter))
-                currentTextField.setBackground( yellowBackground );
+                currentTextField.setStyle("-fx-background-color: yellow;");
             else
-                currentTextField.setBackground( grayBackground );
+                currentTextField.setStyle("-fx-background-color: gray;");
         }
     }
     public void initialize() {
@@ -211,7 +195,9 @@ public class Controller {
 
     void updateCurrentGridPane(){
         currentGridPaneCount++;
+       // currentGridpane.setDisable(true);
         currentGridpane = wordGrids.get(currentGridPaneCount);
+        currentGridpane.setDisable(false);
     }
 
     void printWordGrids(){
@@ -228,10 +214,15 @@ public class Controller {
         currentWord = "";
 
         for(GridPane row : wordGrids){
+            
             for(Node currentNode : row.getChildren()){
                ((TextField)currentNode).setText("");
-               ((TextField)currentNode).setBackground(resetBackground);
+               ((TextField)currentNode).setStyle("-fx-background-color: -fx-background; -fx-border-color: black;");
             }
+
+            row.setDisable(true);;
         }
+
+        wordGrids.get(0).setDisable(false);
     }
 }

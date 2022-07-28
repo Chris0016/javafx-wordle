@@ -70,7 +70,7 @@ public class WordGenerator {
             
             while(reader.hasNext()){
                 currentWord = reader.nextLine();
-                System.out.println("Checking: " + currentWord + "...");
+                //System.out.println("Checking: " + currentWord + "...");
                 if (currentWord.equals(word))
                     return true;
             }
@@ -79,7 +79,6 @@ public class WordGenerator {
             System.out.println("Could not find word file.");
             e.printStackTrace();
             System.exit(1);
-            return false;
         }
 
        return false;
