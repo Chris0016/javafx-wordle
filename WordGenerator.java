@@ -8,27 +8,25 @@ public class WordGenerator {
     Scanner reader;
     
     private final String WORDS_BASE_PATH = "/Users/coditum/Documents/Wordle/Wordle/src/wordle/" ;
-    private final String ALL_WORDS_PATH =  "all_words.txt";// CHANGE FILE SIZE VARIABLE AS WELL WHEN CHANGING ME
-    private final  String SOME_WORDS_PATH = "some_words.txt"; // CHANGE FILE SIZE VARIABLE AS WELL WHEN CHANGING ME
+    private final String ALL_WORDS_PATH =  "all_words.txt";
+    private final  String SOME_WORDS_PATH = "some_words.txt"; 
 
-    /*
-        To update difficulty
+    private final int SOME_WORDS_SIZE = 5_000;
+    private final int ALL_WORDS_SIZE = 15_900;
 
-        In getRandomWords():
-            
-            Easy Mode:
-                WORDS_BASE_PATH + SOME_WORDS_PATH
-
-            Hard Mode:
-                WORDS_BASE_PATH + ALL_WORDS_PATH
-
-            * Make sure to update the WORD_FILE_SIZE variable when changing as well
-     */
-
-
-    private final int WORD_FILE_SIZE = 15_900; //PLEASE CHANGE ME WHEN CHANGING THE FILE PATH VARIABLE
-    public WordGenerator(){
-       
+    private String wordsFile;
+    private int wordsFileSize; 
+    
+    public WordGenerator(boolean easyMode){
+       if(easyMode){
+            wordsFile = WORDS_BASE_PATH + SOME_WORDS_PATH;
+            wordsFileSize  = SOME_WORDS_SIZE;
+       }
+        else    {
+            wordsFile = WORDS_BASE_PATH + ALL_WORDS_PATH;
+            wordsFileSize = ALL_WORDS_SIZE;
+        }
+           
        
     }
 
@@ -36,9 +34,9 @@ public class WordGenerator {
        
         try{
             int count = 0;
-            int randIdx = (int)(Math.random() * WORD_FILE_SIZE);
+            int randIdx = (int)(Math.random() * wordsFileSize);
 
-            reader = new Scanner(new File(WORDS_BASE_PATH + ALL_WORDS_PATH)); //Update this to set difficulty. 
+            reader = new Scanner(new File(wordsFile)); 
             String currentWord = "";
             
             while(reader.hasNext()){
@@ -59,7 +57,6 @@ public class WordGenerator {
        
        
         return ""; //Will not happen
-        
         
     }
 

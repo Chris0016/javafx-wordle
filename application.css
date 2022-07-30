@@ -18,3 +18,7 @@
     -fx-border-color: black;
     /* -fx-text-box-border: black; */
 }
+
+.button {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #16c416, #32cd32)
+}

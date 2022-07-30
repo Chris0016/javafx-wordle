@@ -9,6 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import java.util.ArrayList;
 
 import javax.lang.model.util.ElementScanner6;
+import javax.swing.text.html.HTMLDocument.BlockElement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -60,6 +61,8 @@ public class Controller {
 
     WordGenerator wordUtil;
 
+    private final boolean IS_EASY_MODE = false; //Change me to update difficulty
+
 
     public Controller() {
         wordGrids = new ArrayList<>();
@@ -67,7 +70,8 @@ public class Controller {
         currentGridPaneCount = 0;
         currentWord = "";
 
-        wordUtil = new WordGenerator();
+        
+        wordUtil = new WordGenerator(IS_EASY_MODE);
         secretWord = wordUtil.getRandomWord();
         System.out.println("Secret Word: " + secretWord);
 
@@ -174,7 +178,7 @@ public class Controller {
             else if (secretWord.contains(currentLetter))
                 currentTextField.setStyle("-fx-background-color: yellow;");
             else
-                currentTextField.setStyle("-fx-background-color: gray;");
+                currentTextField.setStyle("-fx-background-color: #ebedeb;");
         }
     }
     public void initialize() {
@@ -188,7 +192,7 @@ public class Controller {
 
         currentGridpane = wordGrids.get(currentGridPaneCount);
         
-        printWordGrids();        
+        //printWordGrids();        
     }
 
 
@@ -199,6 +203,7 @@ public class Controller {
         currentGridpane.setDisable(false);
     }
 
+    //Debugging
     void printWordGrids(){
         for(GridPane pane : wordGrids){
             System.out.println(pane);

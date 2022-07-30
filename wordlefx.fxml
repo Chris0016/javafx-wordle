@@ -45,9 +45,9 @@
                </font></TextField>
          </children>
       </GridPane>
-      <Label fx:id="headingLabel" layoutX="213.0" layoutY="33.0" prefHeight="50.0" prefWidth="278.0" text="Wordle">
+      <Label fx:id="headingLabel" layoutX="232.0" layoutY="38.0" prefHeight="79.0" prefWidth="223.0" text="Wordle">
          <font>
-            <Font size="40.0" />
+            <Font size="64.0" />
          </font>
       </Label>
       <GridPane fx:id="wordGrid2" disable="true" layoutX="27.0" layoutY="209.0" prefHeight="51.0" prefWidth="516.0">
@@ -84,7 +84,10 @@
                </font></TextField>
          </children>
       </GridPane>
-      <Button fx:id="enterButton" layoutX="434.0" layoutY="545.0" mnemonicParsing="false" onAction="#onEnterClick" prefHeight="26.0" prefWidth="96.0" text="Enter" />
+      <Button fx:id="enterButton" layoutX="224.0" layoutY="557.0" mnemonicParsing="false" onAction="#onEnterClick" prefHeight="50.0" prefWidth="152.0" text="Enter">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
       <GridPane fx:id="wordGrid3" disable="true" layoutX="27.0" layoutY="273.0" prefHeight="51.0" prefWidth="516.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
