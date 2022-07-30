@@ -2,14 +2,11 @@ package wordle;
 
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
 import java.util.ArrayList;
 
-import javax.lang.model.util.ElementScanner6;
-import javax.swing.text.html.HTMLDocument.BlockElement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,9 +56,9 @@ public class Controller {
 
     String secretWord;
 
-    WordGenerator wordUtil;
+    WordUtil wordUtil;
 
-    private final boolean IS_EASY_MODE = false; //Change me to update difficulty
+    private final boolean IS_EASY_MODE = true; //Change me to update difficulty
 
 
     public Controller() {
@@ -71,13 +68,13 @@ public class Controller {
         currentWord = "";
 
         
-        wordUtil = new WordGenerator(IS_EASY_MODE);
+        wordUtil = new WordUtil(IS_EASY_MODE);
         secretWord = wordUtil.getRandomWord();
-        System.out.println("Secret Word: " + secretWord);
+        System.out.println("Secret Word: " + secretWord); //DEBUGGING
 
         invalidInputAlert = new Alert(AlertType.ERROR);
         invalidInputAlert.setTitle("Invalid Input");
-        invalidInputAlert.setContentText("Invalid input. Please make sure that every box has a letter only have one letter per box.");
+        invalidInputAlert.setContentText("Invalid input. Please make sure that every box has only one english letter per box.");
 
         notAWordAlert = new Alert(AlertType.ERROR);
         notAWordAlert.setTitle("Not A Word");
@@ -85,12 +82,12 @@ public class Controller {
 
         winGameAlert = new Alert(AlertType.CONFIRMATION);
         winGameAlert.setTitle("You win");
-        winGameAlert.setContentText("Congratulations you won. The secret word was " + secretWord);
+        winGameAlert.setContentText("Congratulations you won. The secret word was " + secretWord + ".");
 
 
         loseGameAlert = new Alert(AlertType.CONFIRMATION);
         loseGameAlert.setTitle("You loose");
-        loseGameAlert.setContentText("Sorry you loose. The secret word was " + secretWord);
+        loseGameAlert.setContentText("Sorry you loose. The secret word was " + secretWord + ".");
        
        
     
@@ -106,9 +103,9 @@ public class Controller {
         for(int i=0; i < MAX_WORD_SIZE; i++){
            
             currentTextField = ((TextField)currentGridpane.getChildren().get(i));
-            currentLetter = currentTextField.getText();
+            currentLetter = currentTextField.getText().toLowerCase().trim();
 
-            System.out.println("Current letter: " + currentLetter);
+            //System.out.println("Current letter: " + currentLetter);
 
             if (isValidLetter(currentLetter)){
                 currentWord += currentLetter;
@@ -121,7 +118,9 @@ public class Controller {
             }
      
         }
-        if(!wordUtil.isWord(currentWord.toLowerCase())){
+        System.out.println("Current word input: " + currentWord);
+
+        if(!wordUtil.isWord(currentWord)){
             notAWordAlert.showAndWait();
             return;
         }
@@ -129,20 +128,19 @@ public class Controller {
 
         //Check if player wins game
         if(secretWord.equalsIgnoreCase(currentWord)){
-            winGameAlert.show();
+            winGameAlert.showAndWait();
             resetGame();
             return;
         } 
 
         //Check if player loses game(i.e. is in last row and guess is wrong)
         if (currentGridPaneCount == MAX_TRIES - 1){
-            loseGameAlert.show();
+            loseGameAlert.showAndWait();
             resetGame();
             return;
         }
             
         updateCurrentGridPane();
-        System.out.println(currentWord);
         
     }
 
@@ -171,9 +169,9 @@ public class Controller {
         for(int i=0; i < MAX_WORD_SIZE; i++){
             
             currentTextField = ((TextField)currentGridpane.getChildren().get(i));
-            currentLetter = currentTextField.getText();
+            currentLetter = currentTextField.getText().toLowerCase().trim();
 
-            if (currentLetter.toLowerCase().charAt(0) == secretWord.charAt(i))
+            if (currentLetter.charAt(0) == secretWord.charAt(i))
                 currentTextField.setStyle("-fx-background-color: green;");
             else if (secretWord.contains(currentLetter))
                 currentTextField.setStyle("-fx-background-color: yellow;");
@@ -220,14 +218,21 @@ public class Controller {
         for(GridPane row : wordGrids){
             
             for(Node currentNode : row.getChildren()){
-                System.out.println("Evaluating: " + currentNode);
-               //((TextField)currentNode).setText("");
-               //((TextField)currentNode).setStyle("-fx-background-color: -fx-background; -fx-border-color: black;");
+                //System.out.println("Evaluating: " + currentNode);
+               ((TextField)currentNode).setText("");
+               ((TextField)currentNode).setStyle("-fx-background-color: -fx-background; -fx-border-color: black;");
             }
 
             row.setDisable(true);
         }
 
         wordGrids.get(0).setDisable(false);
-    }
+        secretWord = wordUtil.getRandomWord();
+        System.out.println("Secret word: " + secretWord); //DEBUGGING
+
+        winGameAlert.setContentText("Congratulations you won. The secret word was " + secretWord + ".");
+        loseGameAlert.setContentText("Sorry you loose. The secret word was " + secretWord + ".");
+
+        currentGridpane = wordGrids.get(0);
+    }   
 }

@@ -36,9 +36,9 @@ This project was built using JavaFX and therefore requires the Java SDK(version 
 ## Usage
 ---
 
-  Input a valid english word into the current row. Make sure to hit tab or select the next available spot with the cursor to input the following letter. After filling all the spots in the current row click the enter button (or hit tab then enter ). The letters will be highlighted either green, yellow, or gray afterwards. In case, an error has occured a pop-up will appear indicating the issue with your input and how to fix it. 
+  Input a valid english word into the current row. Make sure to hit tab or select the next available spot with the cursor to input the following letter. After filling all the spots in the current row click the enter button (or hit tab then enter ). The letters will be highlighted either green, yellow, or gray afterwards. In case, an error has occurred a pop-up will appear indicating the issue with your input and how to fix it. 
 
-  Whenever the correct secret word is guessed, a pop-up will appear indicating that the word was guessed correctly. Alternatively, after six unsuccessful tries a pop-up will appear indicating that you have lost the game. In either case, the game will proceed to reset and a new random word will be choosen. 
+  Whenever the correct secret word is guessed, a pop-up will appear indicating that the word was guessed correctly. Alternatively, after six unsuccessful tries a pop-up will appear indicating that you have lost the game. In either case, the game will proceed to reset and a new random word will be chosen. 
 
 
   To change difficulty update `IS_EASY_MODE` variable in Controller.java. 
