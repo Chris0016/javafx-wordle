@@ -35,6 +35,7 @@ This project was built using JavaFX and therefore requires the Java SDK(version 
 
 ## Usage
 ---
+  Run Wordle.jar by double clicking the file or running from command line. Make sure to have Java SDK 9+ installed. 
 
   Input a valid english word into the current row. Make sure to hit tab or select the next available spot with the cursor to input the following letter. After filling all the spots in the current row click the enter button (or hit tab then enter ). The letters will be highlighted either green, yellow, or gray afterwards. In case, an error has occurred a pop-up will appear indicating the issue with your input and how to fix it. 
 
